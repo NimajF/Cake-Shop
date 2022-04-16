@@ -1,0 +1,41 @@
+.productDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product{
+    background-color: rgb(255, 244, 231);
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.product span{
+    font-size: 1.5rem;
+    font-family: Poppins;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.product .content{
+    width: 20%;
+}
+
+.product button{
+    width: 200px;
+    background-color: rgb(115, 108, 118);
+    color: white;
+    border: transparent;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.3rem;
+    font-family: Inter;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+.product button:hover{
+        background-color: rgb(96, 68, 89);
+}
