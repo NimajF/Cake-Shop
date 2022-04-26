@@ -24,12 +24,12 @@ export default function CategoryIndex({ products }) {
 export const getServerSideProps = async ({ query: { category } }) => {
   const res = await fetch(`http://localhost:3000/api/${category}`);
   const products = await res.json();
-
-  // if (category !== "tortas") {
-  //   return { notFound: true };
-  //   // this will display your /pages/404.js error page,
-  //   // in the current page, with the 404 http status code.
-  // }
+  const categories = ["tortas", "box", "postres", "desayunos"];
+  if (!categories.includes(category)) {
+    return { notFound: true };
+    //   // this will display your /pages/404.js error page,
+    //   // in the current page, with the 404 http status code.
+  }
   return {
     props: {
       products,
