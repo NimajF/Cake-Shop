@@ -21,7 +21,23 @@ export default async (req, res) => {
         return res.status(500).json({ msg: err.message });
       }
     case "PUT":
+      try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, body, {
+          new: true,
+        });
+        if (!updatedProduct)
+          return res.status(404).json({ msg: "Product not found" });
+        return res.status(204).json();
+      } catch (err) {
+        return res.status(500).json({ msg: err.message });
+      }
     case "DELETE":
+      try {
+        await Product.findByIdAndDelete(id);
+        res.json({ msg: "Product deleted" });
+      } catch (err) {
+        return res.status(500).json({ err: err.message });
+      }
       try {
         const deletedProduct = await Product.findByIdAndDelete(id);
         if (!deletedProduct)
