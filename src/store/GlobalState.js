@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-  const initialState = [];
+  const initialState = {};
   const [cart, setCart] = useState(initialState);
   const [state, dispatch] = useReducer(AppReducer, cart);
 
@@ -34,11 +34,43 @@ export const DataProvider = ({ children }) => {
   }, [cart]);
 
   const addToCart = (newProduct) => {
-    setCart((prev) => [...prev, newProduct]);
+    const prevProduct = cart[newProduct._id];
+    const prevQuantity = prevProduct?.quantity || 0;
+    const prevPrice = prevProduct?.currentPrice || 0;
+    setCart((prev) => ({
+      ...prev,
+      [newProduct._id]: {
+        ...newProduct,
+        quantity: prevQuantity + 1,
+        currentPrice: prevPrice + newProduct.price,
+      },
+    }));
+  };
+
+  const selectQuantity = (value, productId) => {
+    const product = cart[productId];
+    const updatedPrice = product.price * value;
+    setCart((prev) => ({
+      ...prev,
+      [productId]: {
+        ...product,
+        quantity: parseInt(value),
+        currentPrice: updatedPrice,
+      },
+    }));
   };
 
   return (
-    <DataContext.Provider value={{ cart, setCart, state, dispatch, addToCart }}>
+    <DataContext.Provider
+      value={{
+        cart,
+        setCart,
+        selectQuantity,
+        state,
+        dispatch,
+        addToCart,
+      }}
+    >
       {children}
     </DataContext.Provider>
   );
