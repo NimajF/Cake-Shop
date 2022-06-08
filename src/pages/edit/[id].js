@@ -1,23 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
+import { imageUpload } from "../../utils/imageUpload";
 import Layout from "../../components/Layout";
 import Head from "next/head";
+import Image from "next/image";
 import styles from "../../styles/Product.module.css";
+import ImageSelector from "../../components/ImageSelector";
 
 export default function EditProduct({ product }) {
-  const { title, price, category, description, content } = product;
+  const { title, price, category, description, content, images } = product;
   const { push } = useRouter();
   const [updatedProduct, setProduct] = useState(product);
+  const [files, setFile] = useState("");
+  const [save, setSave] = useState(false);
 
   const handleChangeInput = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
-  const handleUploadInput = async (e) => {
-    const uploadFiles = [...e.target.files];
-    setProduct((prev) => ({ ...prev, images: uploadFiles }));
+  const updateImages = (images) => {
+    setFile(images);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const media = await imageUpload(files);
+    console.log(media);
+    setProduct((prev) => ({ ...prev, images: media }));
+    setSave(true);
+    push(`/product/${product._id}`);
+  };
+  useEffect(() => {
+    async function create() {
+      if (
+        product.title &&
+        product.content &&
+        product.description &&
+        product.price &&
+        product.images &&
+        save
+      ) {
+        await updateProduct();
+        setSave(false);
+      } else {
+        return;
+      }
+    }
+    create();
+  }, [save]);
 
   const updateProduct = async () => {
     try {
@@ -33,6 +64,12 @@ export default function EditProduct({ product }) {
     }
   };
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    await deleteProduct();
+    push("/");
+  };
+
   const deleteProduct = async () => {
     try {
       await fetch(`http://localhost:3000/api/products/${product._id}`, {
@@ -43,30 +80,25 @@ export default function EditProduct({ product }) {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await updateProduct();
-    push(`/product/${product._id}`);
-  };
-
-  // const handleDelete = async (e) => {
-  //   e.preventDefault();
-  //   await deleteProduct();
-  //   push("/");
-  // };
-
   return (
     <Layout>
       <Head>
         <title>{title} - Edit</title>
       </Head>
       <div className={styles.productDiv}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.product}>
             <div className={styles.productImages}>
-              {/* <Image src={images[0]} width={500} height={500} /> */}
+              <Image
+                src={images[0]}
+                height="100%"
+                width="100%"
+                layout="responsive"
+                objectFit="cover"
+                priority
+              />
             </div>
-            <div className={styles.productDetails}>
+            <div className={styles.productDetails} style={{ gap: "1rem" }}>
               <input
                 type="text"
                 name="title"
@@ -86,13 +118,14 @@ export default function EditProduct({ product }) {
                 <option value="box">Box</option>
                 <option value="postres">Postres</option>
               </select>
-              <input
+              <ImageSelector images={images} updateImages={updateImages} />
+              {/* <input
                 type="file"
                 name="file"
                 onChange={handleUploadInput}
                 multiple
                 accept="image/*"
-              />
+              /> */}
               <textarea
                 name="description"
                 id="description"
@@ -124,9 +157,13 @@ export default function EditProduct({ product }) {
               {/* <div className={styles.content}>
                 <p>{content}</p>
               </div> */}
+              <button type="submit" className={styles.save}>
+                Guardar
+              </button>
+              <button onClick={handleDelete} className={styles.delete}>
+                Eliminar
+              </button>
             </div>
-            <button type="submit">Guardar</button>
-            {/* <button onClick={handleDelete}>Eliminar</button> */}
           </div>
         </form>
       </div>
