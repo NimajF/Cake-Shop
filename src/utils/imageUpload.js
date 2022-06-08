@@ -6,15 +6,12 @@ export const imageUpload = async (images) => {
     } else {
       const formData = new FormData();
       formData.append("file", file.fileName);
-      formData.append("upload_preset", "qrps4exp");
+      formData.append("upload_preset", process.env.CLOUD_PRESET);
 
-      const res = await fetch(
-        `https://api.cloudinary.com/v1_1/dsscydgze/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const res = await fetch(process.env.CLOUD, {
+        method: "POST",
+        body: formData,
+      });
       const data = await res.json();
       imgArr.push(data.secure_url);
     }
