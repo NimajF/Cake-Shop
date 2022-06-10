@@ -24,3 +24,12 @@ export const imageUpload = async (images) => {
   }
   return imgArr;
 };
+
+export const deleteAllImages = async (images) => {
+  for (let file of images) {
+    const res = await fetch(`http://localhost:3000/api/destroy`, {
+      method: "POST",
+      body: JSON.stringify(file),
+    }).then((r) => r.json());
+  }
+};

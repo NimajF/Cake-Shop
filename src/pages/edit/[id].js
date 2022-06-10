@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
-import { imageUpload } from "../../utils/imageUpload";
+import { imageUpload, deleteAllImages } from "../../utils/imageUpload";
 import Layout from "../../components/Layout";
 import Head from "next/head";
 import Image from "next/image";
@@ -19,8 +19,11 @@ export default function EditProduct({ product }) {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
-  const updateImages = (images) => {
-    setFile(images);
+  const updateImages = (images, deleteImages) => {
+    const arr = [images];
+    arr.push(deleteImages);
+    console.log(arr);
+    setFile(arr);
   };
 
   const handleSubmit = async (e) => {
@@ -72,6 +75,7 @@ export default function EditProduct({ product }) {
 
   const deleteProduct = async () => {
     try {
+      deleteAllImages(files[0]);
       await fetch(`http://localhost:3000/api/products/${product._id}`, {
         method: "DELETE",
       });
@@ -90,7 +94,7 @@ export default function EditProduct({ product }) {
           <div className={styles.product}>
             <div className={styles.productImages}>
               <Image
-                src={images[0]}
+                src={images[0].url}
                 height="100%"
                 width="100%"
                 layout="responsive"
