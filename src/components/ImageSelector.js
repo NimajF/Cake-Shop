@@ -4,19 +4,12 @@ import { MdDeleteForever } from "react-icons/md";
 
 export default function ImageSelector({ images, updateImages }) {
   const [allFiles, setToAllFiles] = useState([]);
-  const [imgUrl, setImgUrl] = useState([]);
-
-  // cloudinary.config({
-  //   cloud_name: process.env.CLOUD_NAME,
-  //   api_key: process.env.CLOUD_API_KEY,
-  //   api_secret: process.env.CLOUD_API_SECRET,
-  // });
+  const [imagesToDelete, setImageToDelete] = useState([]);
 
   useEffect(() => {
     if (images.length) {
       for (let img of images) {
-        setToAllFiles((prev) => [...prev, { secure_url: img }]);
-        setImgUrl((prev) => [...prev, img]);
+        setToAllFiles((prev) => [...prev, img]);
       }
     }
   }, []);
@@ -27,25 +20,18 @@ export default function ImageSelector({ images, updateImages }) {
       ...prev,
       { fileName: uploadFiles, obj: URL.createObjectURL(uploadFiles) },
     ]);
-    // setFile(uploadFiles);
-    // setMiniImage((prev) => [...prev, URL.createObjectURL(uploadFiles)]);
   };
 
   useEffect(() => {
-    updateImages(allFiles);
-    // updateImages(
-    //   allFiles.filter((file) => file.hasOwnProperty("fileName") === true)
-    // );
+    updateImages(allFiles, imagesToDelete);
   }, [allFiles]);
 
   const deleteImage = async (image) => {
     if (image.obj) {
       setToAllFiles((prev) => prev.filter((file) => file.obj !== image.obj));
-    } else if (image.secure_url) {
-      setImgUrl((prev) => prev.filter((file) => file !== image.secure_url));
-      setToAllFiles((prev) =>
-        prev.filter((file) => file.secure_url !== image.secure_url)
-      );
+    } else if (image.url) {
+      setImageToDelete((prev) => [...prev, image]);
+      setToAllFiles((prev) => prev.filter((file) => file.url !== image.url));
     }
   };
 
@@ -76,7 +62,7 @@ export default function ImageSelector({ images, updateImages }) {
           }}
           onClick={() => deleteImage(image)}
         />
-        <Image src={image.secure_url || image.obj} layout="fill" />
+        <Image src={image.url || image.obj} layout="fill" />
       </div>
     ));
   return (
