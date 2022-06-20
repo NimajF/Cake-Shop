@@ -1,0 +1,122 @@
+.homeContainer{
+  align-self: center;
+  width: 80%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+
+.homeContainer h2{
+  font-family: Poppins;
+}
+
+.homeProducts{
+  align-self: center;
+  padding: 2rem;
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  justify-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  overflow: hidden;
+}
+
+.homeProduct{
+  position: relative;
+  width: 25%;
+  min-width: 250px;
+  font-family: Poppins;
+  font-weight: 900;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+}
+
+.homeProduct:hover{
+  border: 1px solid rgb(234, 215, 215);
+}
+
+.homeProduct svg{
+    opacity: 0;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: #fff1f1;
+    font-size: 1.5rem;
+    z-index: 3;
+    transition: .2s ease-in-out;
+}
+.homeProduct:hover svg{
+  opacity: 1;
+}
+.homeProduct svg:hover{
+  background-color: #7250f8;
+  color: #ffffff;
+  border-radius: 2px;
+}
+
+.homeProduct .imageDiv{
+  position: relative;
+  width: 100%;
+  height: 190px;
+}
+
+.imageDiv img{
+  width: 100%;
+  height: 100%;
+  transition: .1s ease-in-out;
+}
+
+.homeProduct:hover img{
+    transform: scale(1.1);
+}
+
+.homeProduct .productDetails{
+  margin-top: -2rem;
+  padding: 1.2rem;
+}
+
+.homeProduct .productDetails h2 {
+  color: #a57098;
+  font-family: Inter;
+  font-weight: 400;
+}
+.homeProduct .productDetails p{
+  font-family: Inter;
+  font-weight: 400;
+  color: #393939;
+  margin-top: -12px;
+  margin-bottom: 20px;
+}
+.homeProduct .productDetails span{
+  font-size: 1.3rem;
+  color: #333333;
+}
+
+.categoryLinks{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.categoryLinks a{
+    color: rgb(238, 162, 238);
+    font-family: Inter;
+    font-weight: 300;
+}
+
+.categoryLinks a.active{
+    color: rgb(198, 89, 198);
+    border-bottom: 1px solid;
+}
+
+
+.categoryLinks a:hover{
+    color: rgb(198, 89, 198);
+}

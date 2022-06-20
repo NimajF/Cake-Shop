@@ -1,4 +1,9 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
+import Layout from "../components/Layout";
+import CategoryProduct from "../components/CategoryProduct";
+import styles from "../styles/Category.module.css";
+import Link from "next/link";
 
 export default function CategoryIndex({ products }) {
   const {
@@ -8,16 +13,33 @@ export default function CategoryIndex({ products }) {
   if (!category) {
     router.push("/");
   }
+
+  const categories = ["tortas", "desayunos", "box", "postres"];
+
+  const categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
+
+  const categoryLinks = categories.map((el) => (
+    <Link href={`/${el}`} key={el}>
+      <a key={el} className={el === category ? styles.active : ""}>
+        {el.charAt(0).toUpperCase() + el.slice(1)}
+      </a>
+    </Link>
+  ));
+
+  const categoryProducts = products.map((product, idx) => (
+    <CategoryProduct key={idx} product={product} />
+  ));
   return (
-    <div>
-      <h1>{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
-      {products.map((product, idx) => (
-        <div key={idx}>
-          <h2>{product.title}</h2>
-          <h3>{product.description}</h3>
-        </div>
-      ))}
-    </div>
+    <Layout>
+      <Head>
+        <title>{categoryTitle} | Productos</title>
+      </Head>
+      <h1>{categoryTitle}</h1>
+      <span className={styles.categoryLinks}>{categoryLinks}</span>
+      <div className={styles.homeContainer}>
+        <div className={styles.homeProducts}>{categoryProducts}</div>
+      </div>
+    </Layout>
   );
 }
 
