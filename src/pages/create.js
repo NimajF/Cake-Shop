@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, memo } from "react";
 import { getSession, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import { imageUpload } from "../utils/imageUpload";
 import Layout from "../components/Layout";
 import ImageSelector from "../components/ImageSelector";
@@ -14,14 +13,15 @@ export default function NewProduct({ session }) {
     content: "",
     images: "",
     category: "tortas",
+    festivity: "no",
   };
 
   const [product, setProduct] = useState(initialState);
-  const { title, price, description, content, category } = product;
+  const { title, price, description, content, category, festivity } = product;
 
   const [miniImage, setMiniImage] = useState([]);
-  const [imgUrl, setImgUrl] = useState([]);
   const [files, setFile] = useState("");
+  const [submitted, setSubmit] = useState(false);
   const ref = useRef();
 
   const handleChangeInput = (e) => {
@@ -29,14 +29,15 @@ export default function NewProduct({ session }) {
   };
 
   const updateImages = (images) => {
-    setFile(images);
+    const arr = [images];
+    arr.push([]);
+    setFile(arr);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const media = await imageUpload(files);
     setProduct((prev) => ({ ...prev, images: media }));
-    // ref.current.value = "";
   };
 
   useEffect(() => {
@@ -48,9 +49,9 @@ export default function NewProduct({ session }) {
         product.price &&
         product.images
       ) {
-        console.log("dddddd");
         await createProduct();
         setProduct(initialState);
+        setSubmit(true);
       } else {
         return;
       }
@@ -102,7 +103,26 @@ export default function NewProduct({ session }) {
             <option value="box">Box</option>
             <option value="postres">Postres</option>
           </select>
-          <ImageSelector images={miniImage} updateImages={updateImages} />
+          <select
+            name="festivity"
+            id="festivity"
+            value={festivity}
+            onChange={handleChangeInput}
+            required
+          >
+            <option value="no">No festivo</option>
+            <option value="pascuas">Pascuas</option>
+            <option value="enamorados">San Valentin</option>
+            <option value="navidad">Navidad</option>
+            <option value="dia del padre">Dia del Padre</option>
+            <option value="dia de la madre">Dia de la Madre</option>
+            <option value="dia del nino">Dia del Niño</option>
+          </select>
+          <ImageSelector
+            images={miniImage}
+            updateImages={updateImages}
+            isSubmitted={submitted}
+          />
           <textarea
             name="description"
             id="description"

@@ -9,7 +9,8 @@ import styles from "../../styles/Product.module.css";
 import ImageSelector from "../../components/ImageSelector";
 
 export default function EditProduct({ product }) {
-  const { title, price, category, description, content, images } = product;
+  const { title, price, category, description, content, festivity, images } =
+    product;
   const { push } = useRouter();
   const [updatedProduct, setProduct] = useState(product);
   const [files, setFile] = useState("");
@@ -121,6 +122,21 @@ export default function EditProduct({ product }) {
                 <option value="tortas">Tortas</option>
                 <option value="box">Box</option>
                 <option value="postres">Postres</option>
+              </select>
+              <select
+                name="festivity"
+                id="festivity"
+                defaultValue={festivity}
+                onChange={handleChangeInput}
+                required
+              >
+                <option value="no">No festivo</option>
+                <option value="pascuas">Pascuas</option>
+                <option value="enamorados">San Valentin</option>
+                <option value="navidad">Navidad</option>
+                <option value="dia del padre">Dia del Padre</option>
+                <option value="dia de la madre">Dia de la Madre</option>
+                <option value="dia del nino">Dia del Niño</option>
               </select>
               <ImageSelector images={images} updateImages={updateImages} />
               {/* <input
