@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { MdDeleteForever } from "react-icons/md";
 
-export default function ImageSelector({ images, updateImages }) {
+export default function ImageSelector({ images, updateImages, isSubmitted }) {
   const [allFiles, setToAllFiles] = useState([]);
   const [imagesToDelete, setImageToDelete] = useState([]);
+  const ref = useRef();
 
   useEffect(() => {
     if (images.length) {
@@ -21,7 +22,7 @@ export default function ImageSelector({ images, updateImages }) {
       { fileName: uploadFiles, obj: URL.createObjectURL(uploadFiles) },
     ]);
   };
-
+  console.log(allFiles);
   useEffect(() => {
     updateImages(allFiles, imagesToDelete);
   }, [allFiles]);
@@ -34,6 +35,12 @@ export default function ImageSelector({ images, updateImages }) {
       setToAllFiles((prev) => prev.filter((file) => file.url !== image.url));
     }
   };
+
+  useEffect(() => {
+    if (!isSubmitted) return;
+    ref.current.value = "";
+    setToAllFiles([]);
+  }, [isSubmitted]);
 
   const allImages =
     allFiles.length > 0 &&
@@ -77,11 +84,12 @@ export default function ImageSelector({ images, updateImages }) {
       <input
         type="file"
         name="file"
-        // ref={ref}
+        ref={ref}
         onChange={handleUploadInput}
         multiple
         accept="image/*"
         style={{ width: "90%" }}
+        required={allFiles.length === 0}
       />
       {allImages}
     </div>
