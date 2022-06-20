@@ -25,12 +25,16 @@ const cakeSchema = new Schema(
     },
     images: {
       type: Array,
-      required: false,
+      required: true,
     },
     category: {
       type: String,
       required: true,
       trim: true,
+    },
+    festivity: {
+      type: String,
+      required: false,
     },
   },
   {
