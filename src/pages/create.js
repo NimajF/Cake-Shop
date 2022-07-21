@@ -100,6 +100,7 @@ export default function NewProduct({ session }) {
             required
           >
             <option value="tortas">Tortas</option>
+            <option value="desayunos">Desayunos</option>
             <option value="box">Box</option>
             <option value="postres">Postres</option>
           </select>
