@@ -9,8 +9,21 @@ export default async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const products = await Product.find();
-        return res.status(200).json(products);
+        let allProducts = [];
+        const noFestivityProducts = await Product.find({
+          festivity: { $all: ["no"] },
+        });
+        const festivityProducts = await Product.find({
+          festivity: { $nin: "no" },
+        });
+
+        if (!festivityProducts) {
+          return res.status(200).json(noFestivityProducts);
+        } else {
+          allProducts = festivityProducts;
+          allProducts.push(...noFestivityProducts);
+          return res.status(200).json(allProducts);
+        }
       } catch (err) {
         return res.status(500).json({ msg: err.message });
       }

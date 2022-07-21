@@ -33,12 +33,6 @@ export default async (req, res) => {
       }
     case "DELETE":
       try {
-        await Product.findByIdAndDelete(id);
-        res.json({ msg: "Product deleted" });
-      } catch (err) {
-        return res.status(500).json({ err: err.message });
-      }
-      try {
         const deletedProduct = await Product.findByIdAndDelete(id);
         if (!deletedProduct)
           return res.status(404).json({ msg: "Product not found" });
@@ -46,6 +40,20 @@ export default async (req, res) => {
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
+    // try {
+    //   await Product.findByIdAndDelete(id);
+    //   res.json({ msg: "Product deleted" });
+    // } catch (err) {
+    //   return res.status(500).json({ err: err.message });
+    // }
+    // try {
+    //   const deletedProduct = await Product.findByIdAndDelete(id);
+    //   if (!deletedProduct)
+    //     return res.status(404).json({ msg: "Product not found" });
+    //   return res.status(204).json();
+    // } catch (err) {
+    //   return res.status(400).json({ msg: err.message });
+    // }
 
     default:
       return res.status(400).json({ msg: "Method not supported" });
