@@ -13,10 +13,23 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const categoryProducts = await Product.find({ category: category });
-        if (!categoryProducts)
+        let allProducts = [];
+        const noFestivityProducts = await Product.find({
+          category: category,
+          festivity: { $all: ["no"] },
+        });
+        const festivityProducts = await Product.find({
+          category: category,
+          festivity: { $nin: "no" },
+        });
+
+        if (!noFestivityProducts || !festivityProducts) {
           return res.status(404).json({ msg: "Category does not exist" });
-        return res.status(200).json(categoryProducts);
+        } else {
+          allProducts = festivityProducts;
+          allProducts.push(...noFestivityProducts);
+          return res.status(200).json(allProducts);
+        }
       } catch (err) {
         return res.status(500).json({ msg: err.message });
       }
