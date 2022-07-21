@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: center;
   justify-items: center;
+  flex-wrap: wrap;
 }
 
 .homeContainer h2{
@@ -26,7 +27,7 @@
 
 .homeProduct{
   position: relative;
-  width: 25%;
+  width: 20%;
   min-width: 250px;
   font-family: Poppins;
   font-weight: 900;
@@ -119,4 +120,16 @@
 
 .categoryLinks a:hover{
     color: rgb(198, 89, 198);
+}
+
+@media (max-width: 1200px){
+  .homeContainer{
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px){
+  .homeContainer{
+    width: 100%;
+  }
 }

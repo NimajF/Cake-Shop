@@ -9,11 +9,268 @@
     gap: 30px;
     overflow: hidden;
     padding: 2rem;
+    transition: all 1s ease-in-out;
 }
 
-.cartContainer button{
-    width: 150px;
+.emptyCartDiv{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.emptyCartDiv button{
+    cursor: pointer;
+    background-color: #f3cce7;
+    color: #fff9fe;
+    font-family: Inter;
     font-size: 1.1rem;
+    border: transparent;
+    border-radius: 5px;
+    padding: 10px;
+}
+.emptyCartDiv button:hover{
+    background-color: #d79cc6;
+}
+
+.cart{
+    /* background-color: rgb(255, 240, 245); */
+
+    padding: 1.5rem;
+    /* border: 1px solid rgb(244, 244, 244); */
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+.cartProduct{
+    position: relative;
+    width: 100%;
+    min-width: 50px;
+    background-color: rgb(255, 240, 245);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 1rem;
+}
+
+.cartProduct .productImage{
+    position: relative;
+    width: 200px;
+    height: 100px;
+}
+
+.cartProduct .qtySelect{
+    position: absolute;
+    bottom: 12px;
+    right: 10px;
+    font-family: Inter;
+}
+
+.cartProduct .qtySelect label{
+    font-size: 1.1rem;
+    margin-right: 10px;
+}
+
+.cartProduct .qtySelect select{
+    cursor: pointer;
+    width: 50px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 5px;
+    color: rgb(77, 77, 77);
+    font-size: 1.1rem;
+    font-family: Inter;
+    appearance: none;
+}
+.cartProduct .qtySelect select:focus{
+    background-image: none;
+    outline: none;
+    box-shadow: none;
+  
+}
+
+.cartProduct .qtySelect select:hover{
+    border: 1px solid rgb(211, 166, 232);
+}
+
+.cartContainer .purchaseBtn{
+    padding: 10px;
+    font-size: 1.1rem;
+    font-family: Inter;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(145, 225, 113);
+    color: rgb(255, 255, 255);
+    border: 1px solid transparent;
+    transition: all .2s;
+}
+
+.cartContainer .purchaseBtn:hover {
+    background-color: rgb(109, 185, 78);
+    color: rgb(255, 255, 255);
+}
+/* }
+ .cartContainer button > svg {
+    width: 35px;
+    font-size: 1.5rem;
+    margin-left: 10px;
+    transition: transform .3s ease-in-out;
+}
+.cartContainer button:hover svg {
+    transform: translateX(5px);
+}  
+.cartContainer button:active {
+    transform: scale(0.95);
+} */
+
+.cartProduct svg{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: rgb(244, 94, 94);
+    font-size: 1.5rem;
+    transition: .1s ease-in-out;
+}
+.cartProduct svg:hover{
+    transform: scale(1.1);
+    color: rgb(230, 43, 43);
+}
+
+.cartProduct .productInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cartProduct span{
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-family: Inter;
+    font-style: italic;
+}
+
+.cartProduct .productInfo h2{
+    cursor: pointer;
+    font-family: Inter;
+    color: rgb(67, 67, 67);
+    font-weight: 300;
+    font-size: 1.3rem;
+}
+
+.cartProduct .productInfo h2:hover{
+    color: rgb(98, 98, 98);
+    text-decoration: 1px underline; 
+}
+
+.orderContainer {
+    width: 30%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: #edc3e1; */
+    padding: 10px;
+    /* border: 1px solid rgb(139, 139, 139); */
+    border-radius: 5px;
+    margin-bottom: 5rem;
+}
+
+.order {
+    padding: 15px;
+    border-radius: 5px;
+    text-align: left;
+    /* background-color: #fafafa; */
+}
+.order p{
+    font-size: 1.1rem;
+    font-family: Inter;
+    margin-top: 0;
+}
+.order span{
+    padding: 10px;
+    background-color: #f2e3ee;
+    font-family: Inter;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.order span b{
+    font-size: 1.5rem;
+}
+
+.emailDiv{
+    background-color: #f8edf5;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+.emailDiv label{
+    display: block;
+    margin-bottom: .2em;
+}
+.emailDiv input{
+    border: 1px solid rgb(211, 166, 232);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1rem;
+    color: rgb(148, 61, 144);
+    transition: .2s ease-in-out;
+}
+.emailDiv input[type=text]{
+    border-radius: 5px;
+}
+.emailDiv input[type=email]{
+    border-radius: 5px;
+}
+
+.emailDiv input:focus{
+    outline: none;
+    box-shadow: 0px 0px 1px 2px rgb(219, 206, 225);
+}
+.emailDiv textarea{
+    width: 100%;
+    font-family: Inter;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid rgb(211, 166, 232);
+    color: rgb(148, 61, 144);
+    padding: 10px;
+    resize: vertical;
+    transition: .2s ease-in-out;
+}
+.emailDiv textarea:focus{
+    outline: none;
+    box-shadow: 0px 0px 1px 2px rgb(219, 206, 225);
+}
+.emailDiv button{
+    color: white;
+    background-color: rgb(186, 129, 240);
+    padding: .8em 1em;
+    border: 0;
+    border-radius: 5px;
+    transition: .2s ease-in-out;
+}
+.emailDiv button:hover{
+    background-color: rgb(172, 111, 230);
+    cursor: pointer;
+}
+
+.orderLinks {
+        margin-top: 1.5rem;
+        align-self: center;
+        display: flex;
+        gap: 20px;
+}
+.orderLinks button:first-child{
+    width: 120px;
+    font-size: 1rem;
     font-family: Inter;
     font-weight: 500;
     cursor: pointer;
@@ -26,68 +283,65 @@
     align-items: center;
     transition: all .2s;
 }
-
-.cartContainer button:hover {
+.orderLinks button:nth-of-type(2){
+    width: 120px;
+    font-size: 1rem;
+    font-family: Inter;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background-color: #ff59d0;
+    color: rgb(255, 255, 255);
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    transition: all .2s;
+}
+.orderLinks button:first-child:hover {
     background-color: rgb(98, 198, 59);
     color: rgb(255, 255, 255);
 }
-.cartContainer button > svg {
+.orderLinks button:nth-of-type(2):hover{
+    background-color: #f922bc;
+    color: rgb(255, 255, 255);
+}
+.orderLinks button > svg {
     width: 35px;
     font-size: 1.5rem;
     margin-left: 10px;
     transition: transform .3s ease-in-out;
 }
-.cartContainer button:hover svg {
+.orderLinks button:hover svg {
     transform: translateX(5px);
 }  
-.cartContainer button:active {
+.orderLinks button:active {
     transform: scale(0.95);
 }
 
 
-.cart{
-    background-color: aliceblue;
-    padding: 1.5rem;
-    border: 1px solid rgb(220, 220, 220);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-}
-.cartProduct{
-    width: 100%;
-    min-width: 50px;
-    background-color: rgb(250, 225, 250);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 1rem;
-}
+@media (max-width: 1200px) { 
+    .cartContainer{
+        width: 80%;
+    }
+ }
+@media (max-width: 768px) { 
+    .cartContainer{
+        width: 100%;
+    }
+ }
 
-.cartProduct h2{
-    font-family: Poppins;
-}
-
-.cartProduct span{
-    font-size: 1.1rem;
-    font-weight: 300;
-    font-family: Inter;
-    font-style: italic;
-}
-
-.cartProduct a{
-    width: 150px;
-    background: rgb(248, 207, 248);
-    border: none;
-    border-radius: 5px;
-    font-family: Inter;
-    font-weight: 400;
-    text-align: center;
-    padding: 2px;
-}
-
-.cartProduct a:hover{
-    color: rgb(92, 92, 199);
-}
+ @media (max-width: 576px) { 
+    .cartContainer{
+        padding: 0;
+        background-color: #fdd0f0;
+    }
+    .cartProduct{
+        flex-direction: column;
+        gap: 0px;
+        background-color: white;
+    }
+    .cartProduct .qtySelect select{
+        background-color: #fbdef3;
+    }
+ }
