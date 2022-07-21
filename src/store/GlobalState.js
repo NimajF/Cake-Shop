@@ -47,6 +47,18 @@ export const DataProvider = ({ children }) => {
     }));
   };
 
+  const removeFromCart = (productId) => {
+    setCart((prev) => {
+      const newData = { ...prev };
+      delete newData[productId];
+      return newData;
+    });
+  };
+
+  const resetCart = () => {
+    setCart({});
+  };
+
   const selectQuantity = (value, productId) => {
     const product = cart[productId];
     const updatedPrice = product.price * value;
@@ -65,6 +77,8 @@ export const DataProvider = ({ children }) => {
       value={{
         cart,
         setCart,
+        removeFromCart,
+        resetCart,
         selectQuantity,
         state,
         dispatch,
