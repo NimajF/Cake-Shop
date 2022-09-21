@@ -9,15 +9,15 @@ import styles from "../../styles/Product.module.css";
 import ImageSelector from "../../components/ImageSelector";
 
 export default function EditProduct({ product }) {
-  const { title, price, category, description, content, festivity, images } =
-    product;
   const { push } = useRouter();
   const [updatedProduct, setProduct] = useState(product);
+  const { title, price, category, description, content, festivity, images } =
+    updatedProduct;
   const [files, setFile] = useState("");
   const [save, setSave] = useState(false);
 
   const handleChangeInput = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    setProduct((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const updateImages = (images, deleteImages) => {
@@ -107,7 +107,7 @@ export default function EditProduct({ product }) {
               <input
                 type="text"
                 name="title"
-                defaultValue={title}
+                value={title}
                 placeholder="Titulo del producto"
                 onChange={handleChangeInput}
                 required
@@ -115,18 +115,19 @@ export default function EditProduct({ product }) {
               <select
                 name="category"
                 id="category"
-                defaultValue={category}
+                value={category}
                 onChange={handleChangeInput}
                 required
               >
                 <option value="tortas">Tortas</option>
+                <option value="desayunos">Desayunos</option>
                 <option value="box">Box</option>
                 <option value="postres">Postres</option>
               </select>
               <select
                 name="festivity"
                 id="festivity"
-                defaultValue={festivity}
+                value={festivity}
                 onChange={handleChangeInput}
                 required
               >
@@ -150,7 +151,7 @@ export default function EditProduct({ product }) {
                 name="description"
                 id="description"
                 placeholder="Descripcion del producto"
-                defaultValue={description}
+                value={description}
                 onChange={handleChangeInput}
                 required
               />
@@ -161,7 +162,7 @@ export default function EditProduct({ product }) {
                 cols="30"
                 rows="6"
                 placeholder="Mas detelles del producto"
-                defaultValue={content}
+                value={content}
                 onChange={handleChangeInput}
                 required
               />
@@ -169,7 +170,7 @@ export default function EditProduct({ product }) {
               <input
                 type="number"
                 name="price"
-                defaultValue={price}
+                value={price}
                 placeholder="Asigna un valor al producto"
                 onChange={handleChangeInput}
                 required
