@@ -26,7 +26,11 @@ function Cart() {
     <div key={product._id} className={styles.cartProduct}>
       <MdDeleteForever onClick={() => handleDelete(product._id)} />
       <div className={styles.productImage}>
-        <Image src={product.images[0].url} layout="fill" />
+        <Image
+          src={product.images[0].url}
+          layout="fill"
+          alt={`Imagen del producto ${product.title}`}
+        />
       </div>
       <div className={styles.productInfo}>
         <Link href={`/product/${product._id}`}>
@@ -72,7 +76,9 @@ function Cart() {
       {ifCartEmpty ? (
         <div className={styles.emptyCartDiv}>
           <h1>Su carrito esta vacio</h1>
-          <button>Seguir comprando</button>
+          <Link href="/tortas">
+            <button>Seguir comprando</button>
+          </Link>
         </div>
       ) : (
         <div className={styles.cart}>

@@ -20,7 +20,7 @@ export default function HomeProduct({ product }) {
           <Image
             src={product.images[0].url}
             layout="fill"
-            alt="Imágen del producto"
+            alt={`Imagen del producto ${product.title}`}
           />
         </div>
         <div className={styles.productDetails}>

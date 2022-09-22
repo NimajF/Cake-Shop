@@ -10,25 +10,29 @@ const productIcons = [
     icon: <GiStairsCake />,
     iconCategory: "tortas",
     title: "Tortas",
-    image: "/CAKE.PNG",
+    image: "/cake3.jpg",
+    alt: "Imagen de una torta",
   },
   {
     icon: <MdFreeBreakfast />,
     iconCategory: "desayunos",
     title: "Desayunos",
-    image: "/CAKE.PNG",
+    image: "/breakfast.jpg",
+    alt: "Imagen de un desayuno",
   },
   {
     icon: <GiPresent />,
     iconCategory: "box",
     title: "Box",
-    image: "/CAKE.PNG",
+    image: "/boxes.jpg",
+    alt: "Imagen de un box",
   },
   {
     icon: <IoIceCreamSharp />,
     iconCategory: "postres",
     title: "Postres",
-    image: "/CAKE.PNG",
+    image: "/brownies.jpg",
+    alt: "Imagen de unos brownies postres",
   },
 ];
 
@@ -45,7 +49,7 @@ export default function ProductNav() {
                 width="100%"
                 layout="responsive"
                 objectFit="cover"
-                alt="eee"
+                alt={icon.alt}
               />
             </div>
             <div className={styles.divv}></div>
