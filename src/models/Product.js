@@ -36,6 +36,10 @@ const cakeSchema = new Schema(
       type: String,
       required: false,
     },
+    link: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,
