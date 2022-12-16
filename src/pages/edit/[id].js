@@ -2,17 +2,26 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
 import { imageUpload, deleteAllImages } from "../../utils/imageUpload";
+import generateLink from "../../utils/generateLink";
 import Layout from "../../components/Layout";
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../../styles/Product.module.css";
 import ImageSelector from "../../components/ImageSelector";
+import styles from "../../styles/Product.module.css";
 
 export default function EditProduct({ product }) {
   const { push } = useRouter();
   const [updatedProduct, setProduct] = useState(product);
-  const { title, price, category, description, content, festivity, images } =
-    updatedProduct;
+  const {
+    title,
+    price,
+    category,
+    description,
+    content,
+    festivity,
+    images,
+    link,
+  } = updatedProduct;
   const [files, setFile] = useState("");
   const [save, setSave] = useState(false);
 
@@ -27,14 +36,27 @@ export default function EditProduct({ product }) {
     setFile(arr);
   };
 
+  console.log(product);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const media = await imageUpload(files);
-    console.log(media);
-    setProduct((prev) => ({ ...prev, images: media }));
+    const genLink = generateLink(title);
+    setProduct((prev) => ({ ...prev, images: media, link: genLink }));
     setSave(true);
-    push(`/product/${product._id}`);
+    push(`/product/${genLink}`);
   };
+
+  // const generateLink = () => {
+  //   const separated = title.trim().split(/\s+/);
+  //   let link = [];
+  //   for (let name of separated) {
+  //     link.push(name.charAt(0).toLowerCase() + name.slice(1));
+  //   }
+  //   return link.join("-");
+  //   // setProduct((prev) => ({ ...prev, link: link.join("-") }));
+  // };
+
   useEffect(() => {
     async function create() {
       if (
@@ -56,7 +78,7 @@ export default function EditProduct({ product }) {
 
   const updateProduct = async () => {
     try {
-      await fetch(`http://localhost:3000/api/products/${product._id}`, {
+      await fetch(`http://localhost:3000/api/products/edit/${product._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -71,13 +93,13 @@ export default function EditProduct({ product }) {
   const handleDelete = async (e) => {
     e.preventDefault();
     await deleteProduct();
-    push("/");
+    push("/tortas");
   };
 
   const deleteProduct = async () => {
     try {
       deleteAllImages(files[0]);
-      await fetch(`http://localhost:3000/api/products/${product._id}`, {
+      await fetch(`http://localhost:3000/api/products/edit/${product._id}`, {
         method: "DELETE",
       });
     } catch (error) {
@@ -193,7 +215,7 @@ export default function EditProduct({ product }) {
 }
 
 export async function getServerSideProps({ req, query: { id } }) {
-  const res = await fetch(`http://localhost:3000/api/products/${id}`);
+  const res = await fetch(`http://localhost:3000/api/products/edit/${id}`);
   const session = await getSession({ req });
   if (!session || !res) {
     return {

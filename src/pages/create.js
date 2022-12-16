@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, memo } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { imageUpload } from "../utils/imageUpload";
+import generateLink from "../utils/generateLink";
+import Head from "next/head";
 import Layout from "../components/Layout";
 import ImageSelector from "../components/ImageSelector";
 import styles from "../styles/Create.module.css";
@@ -17,7 +19,8 @@ export default function NewProduct({ session }) {
   };
 
   const [product, setProduct] = useState(initialState);
-  const { title, price, description, content, category, festivity } = product;
+  const { title, price, description, content, category, festivity, link } =
+    product;
 
   const [miniImage, setMiniImage] = useState([]);
   const [files, setFile] = useState("");
@@ -37,8 +40,18 @@ export default function NewProduct({ session }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const media = await imageUpload(files);
-    setProduct((prev) => ({ ...prev, images: media }));
+    const genLink = generateLink(title);
+    setProduct((prev) => ({ ...prev, images: media, link: genLink }));
   };
+
+  // const generateLink = () => {
+  //   const separated = title.trim().split(/\s+/);
+  //   let link = [];
+  //   for (let name of separated) {
+  //     link.push(name.charAt(0).toLowerCase() + name.slice(1));
+  //   }
+  //   setProduct((prev) => ({ ...prev, link: link.join("-") }));
+  // };
 
   useEffect(() => {
     async function update() {
@@ -81,9 +94,13 @@ export default function NewProduct({ session }) {
 
   return (
     <Layout>
+      <Head>
+        <title>Create Product</title>
+      </Head>
       <div className={styles.formDiv}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <h1>Crear producto</h1>
+          <label htmlFor="title">Titulo</label>
           <input
             type="text"
             name="title"
@@ -92,6 +109,7 @@ export default function NewProduct({ session }) {
             onChange={handleChangeInput}
             required
           />
+          <label htmlFor="category">Categoria</label>
           <select
             name="category"
             id="category"
@@ -104,6 +122,7 @@ export default function NewProduct({ session }) {
             <option value="box">Box</option>
             <option value="postres">Postres</option>
           </select>
+          <label htmlFor="festivity">Festividad</label>
           <select
             name="festivity"
             id="festivity"
@@ -113,17 +132,20 @@ export default function NewProduct({ session }) {
           >
             <option value="no">No festivo</option>
             <option value="pascuas">Pascuas</option>
-            <option value="enamorados">San Valentin</option>
+            <option value="san valentin">San Valentin</option>
             <option value="navidad">Navidad</option>
             <option value="dia del padre">Dia del Padre</option>
             <option value="dia de la madre">Dia de la Madre</option>
             <option value="dia del nino">Dia del Niño</option>
           </select>
+          <label htmlFor="images">Imagenes</label>
           <ImageSelector
+            id="images"
             images={miniImage}
             updateImages={updateImages}
             isSubmitted={submitted}
           />
+          <label htmlFor="description">Breve descripcion</label>
           <textarea
             name="description"
             id="description"
@@ -133,6 +155,7 @@ export default function NewProduct({ session }) {
             required
           />
 
+          <label htmlFor="content">Caracteristicas</label>
           <textarea
             name="content"
             id="content"
