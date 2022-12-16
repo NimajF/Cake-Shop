@@ -2,9 +2,9 @@ import { SessionProvider } from "next-auth/react";
 import { DataProvider } from "../store/GlobalState";
 import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, session }) {
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <DataProvider>
         <Component {...pageProps} />
       </DataProvider>
