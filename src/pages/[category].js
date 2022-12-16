@@ -1,4 +1,5 @@
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import Router, { useRouter } from "next/router";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import CategoryProduct from "../components/CategoryProduct";
@@ -6,13 +7,20 @@ import styles from "../styles/Category.module.css";
 import Link from "next/link";
 
 export default function CategoryIndex({ products }) {
-  const {
-    query: { category },
-  } = useRouter();
+  const router = useRouter();
+  const { category, sort } = router.query;
+  const [filterTag, setFilterTag] = useState(sort);
 
-  if (!category) {
-    router.push("/");
-  }
+  // if (!category) {
+  //   router.push("/");
+  // }
+
+  useEffect(() => {
+    router.push({
+      pathname: category,
+      query: { sort: filterTag },
+    });
+  }, [category, filterTag]);
 
   const categories = ["tortas", "desayunos", "box", "postres"];
 
@@ -29,6 +37,7 @@ export default function CategoryIndex({ products }) {
   const categoryProducts = products.map((product, idx) => (
     <CategoryProduct key={idx} product={product} />
   ));
+
   return (
     <Layout>
       <Head>
@@ -37,20 +46,43 @@ export default function CategoryIndex({ products }) {
       <h1>{categoryTitle}</h1>
       <span className={styles.categoryLinks}>{categoryLinks}</span>
       <div className={styles.homeContainer}>
-        <div className={styles.homeProducts}>{categoryProducts}</div>
+        <div className={styles.homeProducts}>
+          <div className={styles.sortForm}>
+            <form autoComplete="off">
+              <label htmlFor="filter">Ordenar por</label>
+              <div className={styles.customSelect}>
+                <select
+                  name="filter"
+                  id="filter"
+                  value={filterTag}
+                  onChange={(e) => setFilterTag(e.target.value)}
+                >
+                  <option value="recent">Recientes</option>
+                  <option value="price">
+                    Precio (Del mas alto al mas bajo)
+                  </option>
+                  <option value="-price">
+                    Precio (Del mas bajo al mas alto)
+                  </option>
+                  {/* <option></option> */}
+                </select>
+                <span className={styles.customArrow}></span>
+              </div>
+            </form>
+          </div>
+          <div className={styles.products}>{categoryProducts}</div>
+        </div>
       </div>
     </Layout>
   );
 }
 
-export const getServerSideProps = async ({ query: { category } }) => {
-  const res = await fetch(`http://localhost:3000/api/${category}`);
+export const getServerSideProps = async ({ query: { category, sort } }) => {
+  const res = await fetch(`http://localhost:3000/api/${category}?sort=${sort}`);
   const products = await res.json();
   const categories = ["tortas", "box", "postres", "desayunos"];
   if (!categories.includes(category)) {
     return { notFound: true };
-    //   // this will display your /pages/404.js error page,
-    //   // in the current page, with the 404 http status code.
   }
   return {
     props: {
