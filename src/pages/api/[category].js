@@ -7,21 +7,35 @@ dbConnect();
 export default async (req, res) => {
   const {
     method,
-    query: { category },
+    query: { category, sort },
   } = req;
+
+  function sortMethods() {
+    if (sort === "recent") {
+      return { _id: -1 };
+    } else {
+      if (sort === "-price") {
+        return { price: 1 };
+      }
+    }
+    return { price: -1 };
+  }
 
   switch (method) {
     case "GET":
       try {
         let allProducts = [];
+        let sorted = sortMethods();
+
         const noFestivityProducts = await Product.find({
           category: category,
           festivity: { $all: ["no"] },
-        });
+        }).sort(sorted);
+
         const festivityProducts = await Product.find({
           category: category,
           festivity: { $nin: "no" },
-        });
+        }).sort(sorted);
 
         if (!noFestivityProducts || !festivityProducts) {
           return res.status(404).json({ msg: "Category does not exist" });
