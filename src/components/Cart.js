@@ -7,10 +7,19 @@ import { AiOutlineWhatsApp } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import styles from "../styles/Cart.module.css";
 
+const useTotalPrice = () => {
+  const { cart } = useContext(DataContext);
+  return Object.values(cart).reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+};
+
 function Cart() {
-  const { cart, removeFromCart, selectQuantity, isCartEmpty } =
+  const { auth, cart, removeFromCart, selectQuantity, isCartEmpty, resetCart } =
     useContext(DataContext);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const totalPrice = useTotalPrice();
+  // const [totalPrice, setTotalPrice] = useState(0);
   const cartObj = Object.values(cart);
   const ifCartEmpty = cartObj.length === 0;
 
@@ -22,6 +31,10 @@ function Cart() {
     removeFromCart(productId);
   };
 
+  const emptyCart = () => {
+    resetCart();
+  };
+
   const cartProducts = cartObj.map((product) => (
     <div key={product._id} className={styles.cartProduct}>
       <MdDeleteForever onClick={() => handleDelete(product._id)} />
@@ -29,12 +42,13 @@ function Cart() {
         <Image
           src={product.images[0].url}
           layout="fill"
+          objectFit="cover"
           alt={`Imagen del producto ${product.title}`}
         />
       </div>
       <div className={styles.productInfo}>
-        <Link href={`/product/${product._id}`}>
-          <h2>{product.title}</h2>
+        <Link href={`/product/${product.link}`}>
+          <h3>{product.title}</h3>
         </Link>
         <span>$ {product.currentPrice}</span>
         <div className={styles.qtySelect}>
@@ -63,28 +77,46 @@ function Cart() {
     </div>
   ));
 
-  useEffect(() => {
-    let price = 0;
-    for (let product of cartObj) {
-      price += product.currentPrice;
-    }
-    setTotalPrice(price);
-  }, [cart]);
+  // useEffect(() => {
+  //   let price = 0;
+  //   for (let product of cartObj) {
+  //     price += product.currentPrice;
+  //   }
+  //   setTotalPrice(price);
+  // }, [cart]);
 
   return (
-    <div className={styles.cartContainer}>
-      {ifCartEmpty ? (
-        <div className={styles.emptyCartDiv}>
-          <h1>Su carrito esta vacio</h1>
-          <Link href="/tortas">
-            <button>Seguir comprando</button>
-          </Link>
-        </div>
-      ) : (
-        <div className={styles.cart}>
-          {cartProducts}
-          <span>
-            <h4
+    <div className={styles.cartDiv}>
+      {!ifCartEmpty && <p>Los pedidos se realizan con 72 horas anticipación</p>}
+      <section className={styles.cartContainer}>
+        {ifCartEmpty ? (
+          <div className={styles.emptyCartDiv}>
+            <h3
+              style={{
+                color: "rgb(67, 67, 67)",
+                fontFamily: "Poppins",
+                fontSize: "1.5rem",
+              }}
+            >
+              Su carrito esta vacío
+            </h3>
+            <Link href="/tortas">
+              <button>Seguir comprando</button>
+            </Link>
+          </div>
+        ) : (
+          <div className={styles.cart}>
+            {/* <button className={styles.emptyCartButton} onClick={emptyCart}>
+            Vaciar carrito
+          </button> */}
+
+            <div className={styles.cartItems}>{cartProducts}</div>
+            <div className={styles.purchaseDiv}>
+              <span>
+                <b>Total</b>
+                <b>${totalPrice}</b>
+              </span>
+              {/* <h4
               style={{
                 fontFamily: "Inter",
                 fontSize: "1.4rem",
@@ -92,16 +124,17 @@ function Cart() {
               }}
             >
               Total: <i style={{ fontWeight: "400" }}>${totalPrice}</i>
-            </h4>
-            <Link href="/order">
-              <button className={styles.purchaseBtn}>
-                Comprar
-                {/* <AiOutlineWhatsApp /> */}
-              </button>
-            </Link>
-          </span>
-        </div>
-      )}
+            </h4> */}
+              <Link href="/order">
+                <button className={styles.purchaseBtn}>
+                  Finalizar pedido
+                  {/* <AiOutlineWhatsApp /> */}
+                </button>
+              </Link>
+            </div>
+          </div>
+        )}
+      </section>
     </div>
   );
 }

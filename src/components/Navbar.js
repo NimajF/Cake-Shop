@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { DataContext } from "../store/GlobalState";
+import Image from "next/image";
 import Link from "next/link";
 import { BsBag } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
@@ -21,11 +22,13 @@ export default function Navbar() {
     }
     setCartNumber(cartNum);
   }, [cart]);
-  console.log(session);
+
   return (
     <nav className="navbar">
       <Link href="/">
-        <span>Cakes and breakfast</span>
+        <span className="logo">
+          <Image src="/logo.jpg" height="65px" width="65px" />
+        </span>
       </Link>
       <div className="nav_links">
         {session && (
