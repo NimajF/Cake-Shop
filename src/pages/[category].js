@@ -22,14 +22,21 @@ export default function CategoryIndex({ products }) {
     });
   }, [category, filterTag]);
 
-  const categories = ["tortas", "desayunos", "box", "postres"];
+  // const categories = ["tortas", "desayunos", "postres"];
+  const navCategories = [
+    { name: "Tortas", query: "tortas" },
+    { name: "Desayunos y Box", query: "desayunos" },
+    { name: "Postres", query: "postres" },
+  ];
+  const categoryTitle =
+    category === "desayunos"
+      ? "Desayunos y Box"
+      : category.charAt(0).toUpperCase() + category.slice(1);
 
-  const categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
-
-  const categoryLinks = categories.map((el) => (
-    <Link href={`/${el}`} key={el}>
-      <a key={el} className={el === category ? styles.active : ""}>
-        {el.charAt(0).toUpperCase() + el.slice(1)}
+  const categoryLinks = navCategories.map((el) => (
+    <Link href={`/${el.query}`} key={el.name}>
+      <a key={el.name} className={el.query === category ? styles.active : ""}>
+        {el.name}
       </a>
     </Link>
   ));
