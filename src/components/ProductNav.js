@@ -10,28 +10,28 @@ const productIcons = [
     icon: <GiStairsCake />,
     iconCategory: "tortas",
     title: "Tortas",
-    image: "/cake3.jpg",
+    image: "/tortas.jpg",
     alt: "Imagen de una torta",
   },
-  {
-    icon: <MdFreeBreakfast />,
-    iconCategory: "desayunos",
-    title: "Desayunos",
-    image: "/breakfast.jpg",
-    alt: "Imagen de un desayuno",
-  },
+  // {
+  //   icon: <MdFreeBreakfast />,
+  //   iconCategory: "desayunos",
+  //   title: "Desayunos",
+  //   image: "/breakfast.jpg",
+  //   alt: "Imagen de un desayuno",
+  // },
   {
     icon: <GiPresent />,
-    iconCategory: "box",
-    title: "Box",
-    image: "/boxes.jpg",
+    iconCategory: "desayunos",
+    title: "Desayunos y Box",
+    image: "/box1.jpg",
     alt: "Imagen de un box",
   },
   {
     icon: <IoIceCreamSharp />,
     iconCategory: "postres",
     title: "Postres",
-    image: "/brownies.jpg",
+    image: "/desayuno.jpg",
     alt: "Imagen de unos brownies postres",
   },
 ];
@@ -42,7 +42,7 @@ export default function ProductNav() {
       {productIcons.map((icon, idx) => (
         <Link key={idx} href={`/${icon.iconCategory}`}>
           <div className={styles.productNavCard}>
-            <div>
+            <div className={styles.imageDiv}>
               <Image
                 src={icon.image}
                 height="100%"
@@ -52,10 +52,10 @@ export default function ProductNav() {
                 alt={icon.alt}
               />
             </div>
-            <div className={styles.divv}></div>
+            {/* <div className={styles.divv}></div> */}
             <div className={styles.productNavCardDetails}>
               <p>{icon.title}</p>
-              <button>Ver mas</button>
+              <button>Ver más</button>
             </div>
           </div>
         </Link>
