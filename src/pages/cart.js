@@ -1,13 +1,13 @@
-import { useState, useEffect, useContext } from "react";
 import Layout from "../components/Layout";
 import Cart from "../components/Cart";
-import { DataContext } from "../store/GlobalState";
-import Link from "next/link";
-import Cookies from "js-cookie";
+import Head from "next/head";
 
 export default function CartPage() {
   return (
     <Layout>
+      <Head>
+        <title>Carrito de compras</title>
+      </Head>
       <h1>Carrito de compras</h1>
       <Cart />
     </Layout>
