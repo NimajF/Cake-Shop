@@ -6,11 +6,28 @@ export const DataContext = createContext();
 export const DataProvider = ({ children }) => {
   const initialState = {};
   const [cart, setCart] = useState(initialState);
+  // const [auth, setAuth] = useState("Guest");
   const [state, dispatch] = useReducer(AppReducer, cart);
-
+  // Cookies.get("myTokenName") ? JSON.parse(Cookies.get("myTokenName")) : null
   // const contextCart = useMemo(() => {
   //   return [cart, setCart];
   // }, [cart, setCart]);
+
+  // const userAuth = () => setAuth(Cookies.get("myTokenName"));
+
+  // useEffect(() => {
+  //   async function getToken() {
+  //     const res = await fetch("http://localhost:3000/api/role");
+  //     res = await res.json();
+  //     console.log(res, "ddd");
+  //     if (typeof res === "object") {
+  //       res = "Guest";
+  //     }
+  //     setAuth(res);
+  //   }
+  //   getToken();
+  //   console.log(auth);
+  // }, []);
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem("cart"));
@@ -25,6 +42,7 @@ export const DataProvider = ({ children }) => {
   // });
 
   useEffect(() => {
+    // localStorage.setItem("cart", JSON.stringify(cart));
     if (cart !== initialState)
       localStorage.setItem("cart", JSON.stringify(cart));
 
@@ -83,6 +101,7 @@ export const DataProvider = ({ children }) => {
         state,
         dispatch,
         addToCart,
+        // auth,
       }}
     >
       {children}
