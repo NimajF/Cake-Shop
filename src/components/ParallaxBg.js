@@ -3,14 +3,22 @@ import styles from "../styles/Home.module.css";
 import Brownies from "../../public/brownies.jpg";
 
 export default function ParallaxBg({ scrollRef }) {
-  const image1 =
-    "https://images.unsplash.com/photo-1597511325152-3189b2b71ef1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80";
+  const image1 = "/breakfast.jpg";
+  const img1 =
+    "https://images.unsplash.com/photo-1426869884541-df7117556757?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80";
+  const image2 =
+    "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80";
 
   const handleScroll = () =>
     scrollRef.current.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <Parallax className={styles.image} bgImage={image1} strength={400}>
+    <Parallax
+      className={styles.image}
+      bgImage={img1}
+      // bgImage={image2 || image1}
+      strength={300}
+    >
       <div
         className={styles.ParallaxDiv}
         style={{
