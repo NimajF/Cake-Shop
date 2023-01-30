@@ -4,7 +4,8 @@
     align-items: flex-start;
     width: 100%;
     margin-top: 5rem;
-    padding: 1rem;
+    margin-bottom: 5rem;
+    padding: 1.5rem;
 }
 .productDiv{
     align-self: center;
@@ -12,88 +13,207 @@
 }
 
 .productDetails{
-    width: 80%;
-    min-width: 350px;
+    position: relative;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 2rem;
-    /* background-color: azure; */
+    justify-content: flex-end;
+    padding: 1.5rem;
 }
 .productDetails h2{
     align-self: flex-start;
-    color: rgb(44, 44, 44);
-    font-weight: 300;
-    font-size: 2rem;
+    text-align: left;
+    width: 100%;
+    margin-top: -1.5rem;
+    color: rgb(62, 62, 62);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 27px;
 }
 
-.productImages{
-    background-color: rgb(43, 118, 118);
-    width: 100%;
-    height: 100%;
+.productDetails .editSvg{
+    color: rgb(124, 90, 116);
+    margin-top: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.productDetails .editSvg p{
+    font-size: 17px;
+    font-family: Roboto;
+    margin: 0;
+}
+.productDetails .editSvg svg{
+    /* font-size: 20px; */
+    background-color: rgb(124, 90, 116);
+    color: #ffffff;
+}
+.productDetails .editSvg:hover p{
+    text-decoration: underline;
+    color: rgb(100, 64, 91);
+}
+.editSvg:hover svg{
+    background-color: rgb(100, 64, 91);
+}
+
+
+.productDetails .categoryLink{
+    font-family: Roboto;
+    font-weight: 300;
+    cursor: pointer;
+    margin-top: -1.5rem;
+    margin-bottom: 2rem;
+    color: rgb(147, 147, 147);
+}
+.productDetails .categoryLink:hover{color: rgb(118, 118, 118); text-decoration: underline;}
+
+.productDetails .festivity{
+    background-color: rgb(246, 246, 246);
+    margin-bottom: 10px;
+    font-family: Roboto;
+    font-weight: 300;
+    color: #474747;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.productDetails h3{
+    font-family: Inter;
+    font-weight: 400;
+    margin-top: 2.5rem;
+    color: rgb(44, 44, 44);
+}
+.productDetails h4{
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: rgb(64, 64, 64);
 }
 
 .product .price{
-    font-size: 1.5rem;
-    font-family: Poppins;
-    font-weight: 500;
-    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-family: Inter;
+    font-weight: 400;
+    color: rgb(61, 61, 61);
 }
 
 .product .content{
     width: 100%;
-    overflow: auto;
-    padding-right: 20px; padding-top: 0px; padding-left: 10px;
-    /* border: 1px solid rgb(255, 228, 228); */
-    border-radius: 5px;
+    padding-top: 0px; padding-left: 20px;
+    border: 1px solid rgb(255, 228, 228);
+    border-radius: 3px;
+    /* -webkit-box-shadow: 0 1px 1px 0 rgb(0 0 0 / 10%); */
+    /* box-shadow: 0 1px 1px 0 rgb(0 0 0 / 10%); */
+    /* background-color: rgb(246, 246, 246); */
 }
 .content p{
-    display: inline-block;
-    max-width: 280px;
+    width: 100%;
+    margin-top: 0px;
+    word-wrap: break-word;
+    white-space: pre-line;
+    padding-right: 20px;
+    color: #373737;
+    font-family: "Roboto";
+    font-weight: 300;
+    margin-bottom: 2rem;
 }
 
 .product button{
     width: 200px;
-    background-color: rgb(115, 108, 118);
+    /* background-color: rgb(115, 108, 118); */
+    background-color: rgb(124, 90, 116);
     color: white;
     border: transparent;
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 10px;
-    font-size: 1.3rem;
-    font-family: Inter;
+    font-size: 1.2rem;
+    font-family: Roboto;
+    font-weight: 300;
+    margin-top: 2rem;
     cursor: pointer;
     transition: .2s ease-in-out;
 }
 .product button:hover{
-        background-color: rgb(96, 68, 89);
+    background-color: rgb(158, 121, 149);
 }
+
+.productImages{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* margin-bottom: 1rem; */
+}
+
+.imgDiv{
+    margin-bottom: 1rem;
+}
+
+.imgViewer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+.imgViewer .imgSelect{
+    width: 100px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0px !important;
+    background: transparent !important;
+    border: 2px solid transparent;
+}
+.imgViewer .imgSelect:focus {
+    border: 2px solid rgb(214, 145, 206);
+}
+.imgViewer .imgSelect:hover {
+    border: 2px solid rgb(214, 145, 206);
+}
+/* .imgViewer .imgSelect img{
+    width: 100%;
+    height: 100px;
+} */
 
 .form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    gap: 2rem;
     
 }
 
 .form input{
-    border: 1px solid rgb(211, 166, 232);
+    width: 100%;
+    border: 1px solid rgb(237, 237, 237);
     border-radius: 5px;
     padding: 10px;
-    font-size: 1.1rem;
-    color: rgb(148, 61, 144);
+    font-size: 1rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 200;
+    color: #7c5a74;
+    background-color: #f8f8f8;
+    margin-bottom: 10px;
     transition: .2s ease-in-out;
 }
+/* .form input:focus{
+    background-color: rgb(255, 255, 255);
+} */
 
 .form select{
-    background-color: rgb(248, 232, 254);
-    border: 1px solid rgb(211, 166, 232);
+    width: 100%;
+    border: 1px solid rgb(237, 237, 237);
     border-radius: 5px;
     padding: 10px;
-    color: rgb(77, 77, 77);
-    font-size: 1.1rem;
-    font-family: Inter;
+    font-size: 1rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 200;
+    color: #7c5a74;
+    background-color: #f8f8f8;
+    margin-bottom: 10px;
+    transition: .2s ease-in-out;
 }
 .form select:focus{
     outline: none;
@@ -113,11 +233,15 @@
 
 .form textarea{
     width: 100%;
-    font-family: Inter;
+    background-color: #f8f8f8;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: .9rem;
+    white-space: pre-line;
     border-radius: 5px;
-    border: 1px solid rgb(211, 166, 232);
-    color: rgb(148, 61, 144);
+    border: 1px solid #83838333;
+    color: #7c5a74;
     padding: 10px;
+    resize: vertical;
     transition: .2s ease-in-out;
 }
 .form textarea:focus{
@@ -126,10 +250,9 @@
 }
 
 .form label{
-    color: aqua;
     color: rgb(39, 39, 39);
     font-size: 1.1rem;
-    font-family: Inter;
+    font-family: Roboto;
 }
 
 .form .save{
@@ -138,10 +261,14 @@
     border: transparent;
     border-radius: 5px;
     padding: 10px;
-    font-size: 1.3rem;
-    font-family: Inter;
     cursor: pointer;
     transition: .2s ease-in-out;
+}
+.form button{
+    font-size: 1rem;
+    font-family: Roboto;
+    font-weight: 400;
+    margin: 0;
 }
 .form .save:hover{
     background-color: rgb(22, 145, 71);
@@ -155,14 +282,84 @@
 }
 
 
+@media (max-width: 1400px) { 
+    .productDiv{
+        width: 70%;
+    }
+    .productDetails{
+        width: 40%;
+    }   
+    .productDetails button{
+        width: 100%;
+    }  
+    .productImages{
+        width: 60%;
+    }
+ }
+
+
 @media (max-width: 1200px) { 
     .productDiv{
         width: 100%;
     }
+    .productDetails{
+        width: 40%;
+        padding: 1rem;
+    }   
+    .productDetails h2{
+        margin-top: 0;
+        font-size: 1.8rem;
+    }
+    .productDetails button{
+        width: 100%;
+    }  
+    .productImages{
+        width: 60%;
+    }
  }
 
- @media (max-width: 768px) { 
+
+
+ @media (max-width: 576px){
     .product{
         flex-direction: column;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .productDiv{
+        width: 100%;
+    }
+    
+    .productDetails{
+        width: 100%;
+        padding: 0;
+    }
+    .productDetails h2{
+        margin-top: 1rem;
+        font-size: 1.9rem;
+    } 
+    .productImages{
+        width: 100%;
+    }
+    /* .productImages  .imgDiv img{
+        border-radius: 3px;
+    } */
+    .productImages .imgSelect img{
+        border-radius: 5px;
+    }
+    .productImages .imgSelect{
+        width: 50px !important;
+        border-radius: 5px !important;
+    }
+    .productImages .imgViewer{
+        width: 100%;
+    }
+    /* .productImages .imgViewer div{
+        width: 50px;
+    }
+     */
+    .form input[type=text]:first-child{
+        margin-top: 2rem;
     }
  }

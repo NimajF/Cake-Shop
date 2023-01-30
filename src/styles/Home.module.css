@@ -9,64 +9,134 @@
 .landingDiv{
   position: relative;
   width: 100%;
-  height: 400px;
-  display: flex;
+  height: 600px;
+  /* display: flex;
   flex-direction: column;
-  justify-content: center;
-  /* border-bottom: 1px solid rgb(255, 255, 255); */
+  justify-content: center; */
+  /* border-bottom: 2px solid #edc3d0;; */
+  box-shadow: 0px 10px 10px #f6e8ec;
 }
-.landingDiv img{
-  filter: blur(3px);
-  -webkit-filter: blur(3px);
+.landingDivFilter{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgb(0, 0, 0, .10);
+}
+/* .landingDiv img{
   z-index: 0;
   width: 100%;
   height: 100%; 
+} */
+
+/* .image{
+  position: relative;
+} */
+.image img{
+  bottom: -200px;
 }
 
 .titleDiv{
-  background-color: rgba(59, 34, 34, 0.3);
+  align-self: center;
+  width: 70%;
+  background-color: rgba(245, 242, 237, 0.2);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   align-self: center;
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   z-index: 1;
   border-radius: 5px;
 }
+.titleDiv h1{
+  color: #ffffff;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: "Palatino Linotype","Book Antiqua",Palatino,serif;
+  font-weight: 600;
+  max-height: 75px;
+  margin-bottom: -.2rem;
+  text-shadow: 1px 1px 8px rgb(46, 46, 46);
+}
+.titleDiv h2{
+  text-align: center;
+  font-family: "Palatino Linotype","Book Antiqua",Palatino,serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  max-height: 30px;
+  margin-bottom: 1rem;
+}
 
 .titleDiv p{
-  color: #dac2c2;
-  font-size: 1.5rem;
-  font-family: Poppins;
-  text-shadow: 2px 2px 3px rgb(0, 0, 0);
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* font-family: Roboto; */
+  font-family: "Palatino Linotype","Book Antiqua",Palatino,serif;
+  font-weight: 400;
+  text-align: center;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.682);
+  word-spacing: 10px;
   z-index: 2;
+}
+
+.titleDiv button{
+  align-self: center;
+  width: 140px;
+  font-family: Roboto;
+  background-color: #be986c;
+  color: #ffffff;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+.titleDiv button:hover{
+  background-color: #cfa473;
+}
+.titleDiv button:focus{
+  outline: none;
+  box-shadow: none;
 }
 
 .productNav{
   align-self: center;
   width: 80%;
-  /* height: 100px; */
+  /* height: 400px; */
   /* background-color: #ffeef2; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 5rem;
+  gap: 2rem;
   font-size: 2rem;
+  margin-top: 5.5rem;
 }
+
+.productNav .imageDiv{
+  width: 100%;
+  height: 100%;
+}
+
 .productNav .divv{
   position: absolute;
-  background-color: rgba(8, 9, 9, 0.2);
+  background-color: rgba(8, 9, 9, 0.1);
   width: 100%;
   height: 100%;
   z-index: 2;
-  transition: .5s ease-in-out;
+  transition: .5s linear;
 }
 .productNav .productNavCard:hover .divv{
-  background-color: rgba(8, 9, 9, 0.3);
+  background-color: rgba(8, 9, 9, 0.4);
 }
 
 .productNav .productNavCard{
   position: relative;
   width: 20%;
-  min-width: 300px;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -80,6 +150,9 @@
   cursor: pointer;
 }
 
+/* .productNav .productNavCard div{
+  border-radius: 5px;
+} */
 .productNav .productNavCard .productNavCardDetails{
   position: absolute;
   align-self: center;
@@ -93,27 +166,37 @@
 .productNav .productNavCard img{
   /* filter: blur(1px);
   -webkit-filter: blur(1px); */
+  /* border-radius: 5px; */
+  border-radius: 0;
+  width: 100%;
   z-index: 0;
-  transition: all .5s ease-in-out;
+  transition: all .5s linear;
 }
 .productNav .productNavCard:hover img{
-  filter: blur(2px);
-  -webkit-filter: blur(2px);
-  transform: scale(1.1);
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+  -webkit-transform: scale(1.03);
+  transform: scale(1.03);
 }
 
 .productNav .productNavCard p{
+  -webkit-transform: translateY(10px);
   transform: translateY(10px);
+  font-size: 2.5rem;
+  font-family: 'Times New Roman', serif;
+  font-weight: 500;
   z-index: 2;
-  text-shadow: 2px 2px 2px rgb(79, 79, 79);
+  text-shadow: 2px 2px 4px rgb(39, 38, 38);
   transition: transform .5s ease-in-out;
 }
 .productNav .productNavCard button{
   opacity: 0;
-  background-color: #a27d9c;
-  color: rgb(255, 247, 247);
+  background-color: #cca982;
+  color: rgb(255, 255, 255);
+  border-radius: 2px;
   border: none;
-  font-family: Poppins;
+  font-family: Poppins; 
+  font-weight: 300;
   font-size: 1.1rem;
   padding: 10px;
   cursor: pointer;
@@ -127,7 +210,7 @@
   opacity: 1;
 }
 .productNav .productNavCard button:hover{
-  background-color: #ba81b1;
+  background-color: #be986c;
 }
 
 
@@ -162,20 +245,22 @@
   align-self: center;
   background-color: #fff8f8;
   width: 100%;
-  padding: 2rem;
+  /* padding: 2rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   justify-items: center;
+  align-items: center;
 }
 
 .homeContainer h2{
-  font-family: Poppins;
+  font-family: Inter;
   font-size: 2.5rem;
   font-weight: 300;
-  color: #545454;
+  color: #727070;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
 }
 
 .homeProducts{
@@ -268,7 +353,7 @@
 }
 
 .personalDiv{
-  background-color: #fdf2fd;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -286,17 +371,23 @@
 .personalDiv .personalImage{
   width: 40%;
 }
+.personalDiv .personalImage img{
+  border-radius: 5px;
+}
 .personalDiv .personalInfoDiv .personalInfo{
-  color: #8e717f;
+  color: #634051;
   width: 40%;
 }
 .personalInfo h3{
   font-family: Inter;
   font-size: 2.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .personalInfo p{
-  font-family: Poppins;
+  font-family: Nunito;
   font-size: 1.2rem;
+  color: #634051;
 }
 
 .howToBuyDiv{
@@ -315,17 +406,17 @@
 }
 .howToBuyDiv h4{
   font-size: 2.5rem;
-  color: #8e717f;
+  color: #634051;
 }
 .howToBuyDiv ul{
   width: 40%;
   margin-top: -2rem;
-  font-family: Poppins;
+  font-family: Nunito;
   font-size: 1.3rem;
-  color: #737373;
+  color: #634051;
 }
 .howToBuyDiv ul li{
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .title {
@@ -350,6 +441,12 @@
 
 
 @media (max-width: 992px) {
+  .homeContainer{
+    padding: 10px;
+  }
+  .titleDiv{
+    width: 90%;
+  }
   .productNav {
     width: 100%;
   }
@@ -377,11 +474,17 @@
   
 }
 
+@media (max-width: 768px){
+  .titleDiv h1{
+    font-size: 3rem;
+  }
+}
+
 @media (max-width: 600px) {
-  .grid {
+  /* .grid {
     width: 100%;
     flex-direction: column;
-  }
+  } */
   .landingDiv {
     height: 300px;
   } 
@@ -396,11 +499,15 @@
   }
   .personalDiv .personalImage{
     width: 100%;
+    margin-bottom: -2rem;
   }
   .personalDiv .personalInfoDiv .personalInfo{
     color: #8e717f;
     width: 100%;
   } 
+  .personalDiv h3{
+    margin-bottom: 0;
+  }
 
   .howToBuyDiv ul{
     width: 90%;
@@ -408,11 +515,39 @@
 }
 
 @media (max-width: 576px){
+  /* .productNav .productNavCard{\
+    width: 30% !important;
+  } */
+  .productNav{
+    margin-top: 50px;
+  }
   .productNav .productNavCard{
+    width: 90% !important;
+  }
+  .ParallaxDiv{
+    height: 400px !important;
+  }
+  .titleDiv{
     width: 90%;
   }
+  .titleDiv h1{
+    font-size: 2.5rem;
+    width: 100%;
+  }
+  .titleDiv button{
+    width: 100%;
+  }
+
   .title{
     font-size: 2rem;
+  }
+
+  .titleDiv h2{
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  .titleDiv p{
+    font-size: 1rem;
   }
   .description{
     font-size: 1.5rem;
