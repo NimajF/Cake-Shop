@@ -4,10 +4,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    // }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
@@ -16,16 +16,35 @@ export default NextAuth({
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
+        username: { label: "Username", type: "text", placeholder: "Username" },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "Password",
+        },
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const user = { id: 1, name: "J Smith", email: "jsmith@example.com" };
+        const user = { id: 1, name: "Admin", role: "Admin" };
+
+        // const res = await fetch(`http://localhost:3000/api/auth/login`, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   // credentials: "include",
+        //   body: JSON.stringify(credentials),
+        // });
+        // const userData = await res.json();
+
+        // if (res.ok && userData) {
+        //   return userData;
+        // }
+        // return null;
 
         if (
           credentials.password === process.env.NEXTAUTH_PASS &&
-          credentials.username === "hola"
+          credentials.username === process.env.NEXTAUTH_USER
         ) {
           console.log("Bienvenido");
           return user;
@@ -37,7 +56,17 @@ export default NextAuth({
     }),
   ],
   session: {
-    jwt: true,
+    maxAge: 30 * 60,
+  },
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      user && (token.user = user);
+      return token;
+    },
+    session: async ({ session, token }) => {
+      session.user = token.user; // Setting token in session
+      return session;
+    },
   },
   // callbacks: {
   //   async jwt({ token, user }) {
