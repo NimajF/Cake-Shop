@@ -49,7 +49,7 @@ export const DataProvider = ({ children }) => {
     // Cookies.set("cart", cart, { expires: 1 / 24 });
     // let products = Cookies.get("cart");
     // console.log(products);
-  }, [cart, initialState]);
+  }, [cart]);
 
   const addToCart = (newProduct) => {
     const prevProduct = cart[newProduct._id];
