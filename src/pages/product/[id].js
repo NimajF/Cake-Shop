@@ -58,7 +58,7 @@ export default function DetailProduct({ product }) {
               </p>
             </Link>
             {session && (
-              <Link href={`/edit/${pr._id}`}>
+              <Link href={`/edit/${pr._id}`} passHref>
                 <span className={styles.editSvg}>
                   <p>
                     Editar <MdModeEdit />
@@ -73,7 +73,7 @@ export default function DetailProduct({ product }) {
               ""
             )}
             <span className={styles.price}>$ {price}</span>
-            <Link href="/cart">
+            <Link href="/cart" passHref>
               <button onClick={handleSave}>Añadir a la cesta</button>
             </Link>
             <h3>{description}</h3>

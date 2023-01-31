@@ -1,4 +1,4 @@
-export default function (title) {
+export default function generateLink(title) {
   const separated = title.trim().split(/\s+/);
   let link = [];
   for (let name of separated) {

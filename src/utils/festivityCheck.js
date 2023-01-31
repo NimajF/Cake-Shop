@@ -7,7 +7,7 @@ const festivities = {
   "dia del nino": "Día del Niño",
 };
 
-export default function (productFestivity) {
+export default function festivityCheck(productFestivity) {
   const isProductFestivity =
     productFestivity !== "no" ? productFestivity : false;
   const festivity = festivities?.[isProductFestivity];
