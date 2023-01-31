@@ -89,7 +89,9 @@ export default function DetailProduct({ product }) {
 }
 
 export async function getServerSideProps({ query: { id } }) {
-  const res = await fetch(`${process.env.BASE_URL}/api/products/${id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`
+  );
 
   if (res.status === 200) {
     const product = await res.json();
