@@ -3,7 +3,7 @@ import Product from "../../../../models/Product";
 
 dbConnect();
 
-export default async (req, res) => {
+export default async function getEditProduct(req, res) {
   const {
     method,
     body,
@@ -58,4 +58,4 @@ export default async (req, res) => {
     default:
       return res.status(400).json({ msg: "Method not supported" });
   }
-};
+}

@@ -4,7 +4,7 @@ import { getSession } from "next-auth/react";
 
 dbConnect();
 
-export default async (req, res) => {
+export default async function getProduct(req, res) {
   const {
     method,
     query: { id },
@@ -21,4 +21,4 @@ export default async (req, res) => {
         return res.status(500).json({ msg: err.message });
       }
   }
-};
+}
