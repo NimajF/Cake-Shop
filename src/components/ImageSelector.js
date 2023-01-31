@@ -13,7 +13,7 @@ export default function ImageSelector({ images, updateImages, isSubmitted }) {
         setToAllFiles((prev) => [...prev, img]);
       }
     }
-  }, [images]);
+  }, []);
 
   const handleUploadInput = (e) => {
     const uploadFiles = e.target.files[0];
@@ -22,10 +22,10 @@ export default function ImageSelector({ images, updateImages, isSubmitted }) {
       { fileName: uploadFiles, obj: URL.createObjectURL(uploadFiles) },
     ]);
   };
-  console.log(allFiles);
+
   useEffect(() => {
     updateImages(allFiles, imagesToDelete);
-  }, [allFiles, imagesToDelete, updateImages]);
+  }, [allFiles]);
 
   const deleteImage = async (image) => {
     if (image.obj) {

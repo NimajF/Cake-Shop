@@ -32,11 +32,8 @@ export default function EditProduct({ product }) {
   const updateImages = (images, deleteImages) => {
     const arr = [images];
     arr.push(deleteImages);
-    console.log(arr);
     setFile(arr);
   };
-
-  console.log(product);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,13 +75,16 @@ export default function EditProduct({ product }) {
 
   const updateProduct = async () => {
     try {
-      await fetch(`http://localhost:3000/api/products/edit/${product._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedProduct),
-      });
+      await fetch(
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/products/edit/${product._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedProduct),
+        }
+      );
     } catch (err) {
       console.error(error);
     }
@@ -99,9 +99,12 @@ export default function EditProduct({ product }) {
   const deleteProduct = async () => {
     try {
       deleteAllImages(files[0]);
-      await fetch(`http://localhost:3000/api/products/edit/${product._id}`, {
-        method: "DELETE",
-      });
+      await fetch(
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/products/edit/${product._id}`,
+        {
+          method: "DELETE",
+        }
+      );
     } catch (error) {
       console.error(error);
     }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, memo } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { imageUpload } from "../utils/imageUpload";
 import generateLink from "../utils/generateLink";
@@ -78,13 +78,16 @@ export default function NewProduct({ session }) {
 
   const createProduct = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/products`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(product),
+        }
+      );
       const data = await res.json();
       console.log(data);
     } catch (err) {

@@ -17,7 +17,7 @@ export const imageUpload = async (images) => {
     }
   }
   for (let file of images[1]) {
-    const res = await fetch(`http://localhost:3000/api/destroy`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/destroy`, {
       method: "POST",
       body: JSON.stringify(file),
     }).then((r) => r.json());
@@ -27,7 +27,7 @@ export const imageUpload = async (images) => {
 
 export const deleteAllImages = async (images) => {
   for (let file of images) {
-    const res = await fetch(`http://localhost:3000/api/destroy`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/destroy`, {
       method: "POST",
       body: JSON.stringify(file),
     }).then((r) => r.json());
