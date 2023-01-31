@@ -118,6 +118,7 @@ export default function EditProduct({ product }) {
             <div className={styles.productImages}>
               <Image
                 src={images[0].url}
+                alt={`Imágen de ${title}`}
                 height="100%"
                 width="100%"
                 layout="responsive"
