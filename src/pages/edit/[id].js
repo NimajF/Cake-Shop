@@ -216,7 +216,7 @@ export default function EditProduct({ product }) {
 }
 
 export async function getServerSideProps({ req, query: { id } }) {
-  const res = await fetch(`http://localhost:3000/api/products/edit/${id}`);
+  const res = await fetch(`${process.env.BASE_URL}/${id}`);
   const session = await getSession({ req });
   if (!session || !res) {
     return {

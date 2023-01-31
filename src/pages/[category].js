@@ -85,7 +85,7 @@ export default function CategoryIndex({ products }) {
 }
 
 export const getServerSideProps = async ({ query: { category, sort } }) => {
-  const res = await fetch(`http://localhost:3000/api/${category}?sort=${sort}`);
+  const res = await fetch(`${process.env.BASE_URL}/${category}?sort=${sort}`);
   const products = await res.json();
   const categories = ["tortas", "box", "postres", "desayunos"];
   if (!categories.includes(category)) {

@@ -89,7 +89,7 @@ export default function DetailProduct({ product }) {
 }
 
 export async function getServerSideProps({ query: { id } }) {
-  const res = await fetch(`http://localhost:3000/api/products/${id}`);
+  const res = await fetch(`${process.env.BASE_URL}/${id}`);
 
   if (res.status === 200) {
     const product = await res.json();
