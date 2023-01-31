@@ -21,13 +21,18 @@ export default function Navbar() {
       cartNum += product.quantity;
     }
     setCartNumber(cartNum);
-  }, [cart]);
+  }, [cart, cartObj]);
 
   return (
     <nav className="navbar">
-      <Link href="/">
+      <Link href="/" passHref>
         <span className="logo">
-          <Image src="/logo.jpg" height="65px" width="65px" />
+          <Image
+            src="/logo.jpg"
+            height="65px"
+            width="65px"
+            alt="Logo Dulce Victorina"
+          />
         </span>
       </Link>
       <div className="nav_links">
@@ -36,14 +41,14 @@ export default function Navbar() {
             <Link href="/api/auth/signout">
               <p>Log out</p>
             </Link>
-            <Link href="/create">
+            <Link href="/create" passHref>
               <span>
                 <FiEdit />
               </span>
             </Link>
           </div>
         )}
-        <Link href="/cart">
+        <Link href="/cart" passHref>
           <span className="bag-wrapper">
             <BsBag />
             {cartNumber > 0 && (

@@ -7,10 +7,10 @@ import { MdModeEdit } from "react-icons/md";
 export default function HomeProduct({ product }) {
   const { data: session } = useSession();
   return (
-    <Link href={`/product/${product._id}`}>
+    <Link href={`/product/${product._id}`} passHref>
       <div className={styles.homeProduct}>
         {session && (
-          <Link href={`/edit/${product._id}`}>
+          <Link href={`/edit/${product._id}`} passHref>
             <div className={styles.editSvgDiv}>
               <MdModeEdit />
             </div>

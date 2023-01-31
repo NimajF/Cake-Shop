@@ -23,10 +23,10 @@ export default function HomeProduct({ product }) {
   // const festivity = festivities?.[productFestivity];
 
   return (
-    <Link href={`/product/${product.link}`}>
+    <Link href={`/product/${product.link}`} passHref>
       <div className={styles.homeProduct}>
         {session && (
-          <Link href={`/edit/${product._id}`}>
+          <Link href={`/edit/${product._id}`} passHref>
             <div className={styles.editSvgDiv}>
               <MdModeEdit />
             </div>

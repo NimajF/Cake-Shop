@@ -16,7 +16,7 @@ export default function ImageViewer({ images, selectImage }) {
 
     useEffect(() => {
       selectImage(selectedImage);
-    }, [selectedImage]);
+    }, []);
 
     return (
       <button className={`${styles.imgSelect}`} onClick={sImage}>

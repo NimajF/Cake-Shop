@@ -40,7 +40,7 @@ export default function ProductNav() {
   return (
     <div className={styles.productNav}>
       {productIcons.map((icon, idx) => (
-        <Link key={idx} href={`/${icon.iconCategory}`}>
+        <Link key={idx} href={`/${icon.iconCategory}`} passHref>
           <div className={styles.productNavCard}>
             <div className={styles.imageDiv}>
               <Image
