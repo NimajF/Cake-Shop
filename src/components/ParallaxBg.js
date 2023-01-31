@@ -17,7 +17,7 @@ export default function ParallaxBg({ scrollRef }) {
       className={styles.image}
       bgImage={img1}
       // bgImage={image2 || image1}
-      strength={300}
+      strength={100}
     >
       <div
         className={styles.ParallaxDiv}
