@@ -4,7 +4,7 @@ import Product from "../../models/Product";
 
 dbConnect();
 
-export default async (req, res) => {
+export default async function getCategory(req, res) {
   const {
     method,
     query: { category, sort },
@@ -50,4 +50,4 @@ export default async (req, res) => {
     default:
       return res.status(400).json({ msg: "Method not supported" });
   }
-};
+}
