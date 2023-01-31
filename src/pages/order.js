@@ -51,7 +51,7 @@ export default function Order() {
     }
     // setTotalPrice(price);
     setOrderMsg(msg.join(", "));
-  }, [cart, cartObj]);
+  }, [cart]);
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
