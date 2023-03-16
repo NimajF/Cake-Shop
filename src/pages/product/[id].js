@@ -10,8 +10,12 @@ import festivityCheck from "../../utils/festivityCheck";
 import Cookies from "js-cookie";
 import { MdModeEdit } from "react-icons/md";
 import styles from "../../styles/Product.module.css";
+import Custom404 from "../../components/Custom404";
 
-export default function DetailProduct({ product }) {
+export default function DetailProduct({ product, notFound }) {
+  if (notFound) {
+    return <Custom404 />;
+  }
   const { data: session } = useSession();
   const [pr] = product;
   const { title, price, description, content, category, images } = pr;
@@ -54,7 +58,9 @@ export default function DetailProduct({ product }) {
 
             <Link href={`/${category}`}>
               <p className={styles.categoryLink}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {category === "desayunos"
+                  ? "Desayunos y Box"
+                  : category.charAt(0).toUpperCase() + category.slice(1)}
               </p>
             </Link>
             {session && (
@@ -88,7 +94,8 @@ export default function DetailProduct({ product }) {
   );
 }
 
-export async function getServerSideProps({ query: { id } }) {
+export async function getServerSideProps({ req, query: { id } }) {
+  let notFound = false;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`
   );
@@ -96,19 +103,30 @@ export async function getServerSideProps({ query: { id } }) {
   if (res.status === 200) {
     const product = await res.json();
 
-    return {
-      props: {
-        product,
-      },
-    };
+    if (product.length) {
+      return {
+        props: {
+          product,
+          notFound,
+        },
+      };
+    } else {
+      notFound = true;
+      return {
+        props: {
+          product,
+          notFound,
+        },
+      };
+    }
   }
 
-  return {
-    props: {
-      error: {
-        statusCode: res.status,
-        statusText: "Invalid Id",
-      },
-    },
-  };
+  // return {
+  //   props: {
+  //     error: {
+  //       statusCode: res.status,
+  //       statusText: "Invalid Id",
+  //     },
+  //   },
+  // };
 }

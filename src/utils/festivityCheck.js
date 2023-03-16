@@ -1,6 +1,6 @@
 const festivities = {
   pascuas: "Pascuas",
-  "san valentin": "San Valentín",
+  enamorados: "San Valentín",
   navidad: "Navidad",
   "dia del padre": "Día del Padre",
   "dia de la madre": "Día de la Madre",

@@ -68,7 +68,13 @@ export default function Footer() {
           </li>
         </ul>
       </div>
-      <p>Derechos reservados a Pili!!</p>
+      <a
+        href="https://benjaminpuricelli.vercel.app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <p>Derechos reservados - Benjamín Francisco Puricelli</p>
+      </a>
     </div>
   );
 }
