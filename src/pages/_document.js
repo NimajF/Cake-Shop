@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import dulcevictorina from "../../public/";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -22,7 +23,13 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="es">
-        <Head />
+        <Head>
+          <meta property="og:title" content="Dulce Victorina" />
+          <meta property="og:description" content="Pastelería artesanal" />
+          <meta property="og:image" content="/dulcevictorina.PNG" />
+          <meta property="og:url" content={process.env.NEXT_PUBLIC_SITE_URL} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </Head>
         <link
           rel="icon"
           type="image/png"

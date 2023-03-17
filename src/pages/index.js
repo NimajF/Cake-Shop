@@ -106,7 +106,7 @@ export default function Home({ products }) {
                     también personalizar el pedido si es posible.
                   </li>
                   <li>
-                    Una vez envíado el pedido me pondré en contacto para
+                    Una vez enviado el pedido me pondré en contacto para
                     coordinar métodos de pago y dirección de envío.
                   </li>
                 </ul>
