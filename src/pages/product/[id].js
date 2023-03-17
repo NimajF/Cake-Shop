@@ -15,7 +15,11 @@ import Custom404 from "../../components/Custom404";
 export default function DetailProduct({ product, notFound }) {
   const { data: session } = useSession();
   const { addToCart } = useContext(DataContext);
-  const [viewImage, setViewImage] = useState(product.length && images[0].url);
+  const [viewImage, setViewImage] = useState(
+    product && product.images && product.images.length
+      ? product.images[0].url
+      : ""
+  );
   if (!product.length) {
     return <Custom404 />;
   }
