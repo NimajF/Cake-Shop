@@ -13,16 +13,16 @@ import styles from "../../styles/Product.module.css";
 import Custom404 from "../../components/Custom404";
 
 export default function DetailProduct({ product, notFound }) {
-  if (notFound) {
+  const { data: session } = useSession();
+  const { addToCart } = useContext(DataContext);
+  const [viewImage, setViewImage] = useState(product.length && images[0].url);
+  if (!product.length) {
     return <Custom404 />;
   }
-  const { data: session } = useSession();
   const [pr] = product;
   const { title, price, description, content, category, images } = pr;
-  const { addToCart } = useContext(DataContext);
-  const festivity = festivityCheck(pr.festivity);
 
-  const [viewImage, setViewImage] = useState(images[0].url);
+  const festivity = festivityCheck(pr.festivity);
 
   const handleSave = () => {
     addToCart(pr);
