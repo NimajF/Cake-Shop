@@ -5,10 +5,12 @@ import Layout from "../components/Layout";
 import Head from "next/head";
 import Link from "next/link";
 import emailjs from "emailjs-com";
+import formValidation from "../utils/formValidation";
 import { BsInstagram } from "react-icons/bs";
 import { AiOutlineWhatsApp } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
 import styles from "../styles/Cart.module.css";
+import { errors } from "jose";
 
 const useTotalPrice = () => {
   const { cart } = useContext(DataContext);
@@ -30,6 +32,8 @@ export default function Order() {
   const [msgSent, setMsgSent] = useState(false);
   const [msgCopied, setCopy] = useState(false);
   const msgRef = useRef(null);
+
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const item = JSON.parse(localStorage.getItem("cart"));
@@ -69,6 +73,11 @@ export default function Order() {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    const validationErrors = formValidation(e);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
     emailjs
       .sendForm(
         "service_ouy3puq",
@@ -155,36 +164,32 @@ export default function Order() {
         <div className={styles.emailDiv}>
           <h3 className={styles.emailH3}>Enviame un mail</h3>
           <form onSubmit={sendEmail}>
-            <p>
-              <label htmlFor="name">Nombre</label>
-              <input type="text" name="name" placeholder="Escribe tu nombre" />
-            </p>
-            <p>
-              <label htmlFor="email">Correo Electronico</label>
-              <input type="email" name="email" placeholder="Escribe tu email" />
-            </p>
-            <p>
-              <label htmlFor="subject">Asunto</label>
-              <input
-                type="text"
-                name="subject"
-                placeholder="Escribe un asunto"
-              />
-            </p>
-            <p>
-              <label htmlFor="message">Mensaje</label>
-              <textarea
-                name="message"
-                defaultValue={orderMsg}
-                ref={msgRef}
-                style={msgCopied ? { background: "#bcffbc" } : {}}
-              />
-              <span className={styles.suggestion}>
-                Podés usar este pedido autogenerado y terminar de
-                personalizarlo.
-              </span>
-              <span onClick={handleCopy}>Copiar mensaje</span>
-            </p>
+            <label htmlFor="name">Nombre</label>
+            <input type="text" name="name" placeholder="Escribe tu nombre" />
+            {errors.name && <p className={styles.error}>{errors.name}</p>}
+
+            <label htmlFor="email">Correo Electronico</label>
+            <input type="email" name="email" placeholder="Escribe tu email" />
+            {errors.email && <p className={styles.error}>{errors.email}</p>}
+
+            {/* <label htmlFor="subject">Asunto</label>
+            <input type="text" name="subject" placeholder="Escribe un asunto" /> */}
+
+            <label htmlFor="message">Mensaje</label>
+            <textarea
+              name="message"
+              defaultValue={orderMsg}
+              ref={msgRef}
+              style={msgCopied ? { background: "#bcffbc" } : {}}
+            />
+            <span className={styles.suggestion}>
+              Podés usar este pedido autogenerado y terminar de personalizarlo.
+            </span>
+            <span onClick={handleCopy} className={styles.copyOrder}>
+              Copiar mensaje
+            </span>
+            {errors.message && <p className={styles.error}>{errors.message}</p>}
+
             <button type="submit">Enviar</button>
           </form>
           <h3 className={styles.emailH3} style={{ textAlign: "center" }}>
