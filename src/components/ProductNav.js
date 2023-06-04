@@ -27,13 +27,13 @@ const productIcons = [
     image: "/box1.jpg",
     alt: "Imagen de un box",
   },
-  {
-    icon: <IoIceCreamSharp />,
-    iconCategory: "postres",
-    title: "Postres",
-    image: "/desayuno.jpg",
-    alt: "Imagen de unos brownies postres",
-  },
+  // {
+  //   icon: <IoIceCreamSharp />,
+  //   iconCategory: "postres",
+  //   title: "Postres",
+  //   image: "/desayuno.jpg",
+  //   alt: "Imagen de unos brownies postres",
+  // },
 ];
 
 export default function ProductNav() {
