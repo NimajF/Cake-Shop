@@ -123,7 +123,7 @@ export default function NewProduct({ session }) {
             <option value="tortas">Tortas</option>
             <option value="desayunos">Desayunos y Box</option>
             {/* <option value="box">Box</option> */}
-            <option value="postres">Postres</option>
+            {/* <option value="postres">Postres</option> */}
           </select>
           <label htmlFor="festivity">Festividad</label>
           <select

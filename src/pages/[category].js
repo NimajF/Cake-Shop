@@ -26,7 +26,7 @@ export default function CategoryIndex({ products }) {
   const navCategories = [
     { name: "Tortas", query: "tortas" },
     { name: "Desayunos y Box", query: "desayunos" },
-    { name: "Postres", query: "postres" },
+    // { name: "Postres", query: "postres" },
   ];
   const categoryTitle =
     category === "desayunos"
