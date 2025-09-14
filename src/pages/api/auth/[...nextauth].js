@@ -82,7 +82,7 @@ export default NextAuth({
   //     return session;
   //   },
   // },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || "kjwdhakjhdwkajdhah",
   // session: {
   //   strategy: "jwt",
   //   maxAge: 30 * 60,
