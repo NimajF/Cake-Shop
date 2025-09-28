@@ -48,7 +48,7 @@ export default function HomeProduct({ product }) {
         <div className={styles.productDetails}>
           <h2>{product.title}</h2>
           {/* <p>{product.description}</p> */}
-          <span>$ {product.price}</span>
+          {/* <span>$ {product.price}</span> */}
         </div>
       </div>
     </Link>

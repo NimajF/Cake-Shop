@@ -16,18 +16,9 @@ export default function ParallaxBg({ scrollRef }) {
     <Parallax
       className={styles.image}
       bgImage={img1}
-      // bgImage={image2 || image1}
       strength={100}
     >
-      <div
-        className={styles.ParallaxDiv}
-        style={{
-          height: 500,
-          display: "flex",
-          justifyContent: "center",
-          background: "rgb(0, 0, 0, .2)",
-        }}
-      >
+      <div className={styles.ParallaxDiv}>
         <div className={styles.landingDivFilter} />
         <div className={styles.titleDiv}>
           <h1 className={styles.title}>Dulce Victorina</h1>
